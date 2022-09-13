@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:30 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/06 15:43:31 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:49:27 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	*chartoint(char	**arg_a, int size)
 		{
 			if (ft_isdigit(arg_a[i][j]) == 0)
 			{
-				ft_printf("Um dos argumentos não é aceitavel\n");
+				ft_printf("Error\nUm dos argumentos não é aceitavel\n");
 				free(num);
 				exit(0);
 			}
@@ -50,7 +50,7 @@ void	check_repeat(int *a_stk, int size)
 		{
 			if(a_stk[i] == a_stk[j])
 			{
-				ft_printf("argumentos repetidos\n");
+				ft_printf("Error\nArgumentos repetidos\n");
 				free(a_stk);
 				exit(0);
 			}

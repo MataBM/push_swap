@@ -6,7 +6,7 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/09/06 15:52:35 by bantunes         ###   ########.fr        #
+#    Updated: 2022/09/13 15:01:16 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,20 @@ CFlags = -Wall -Wextra -Werror
 RM = rm -f
 
 SOURCE	=	main.c \
-			check_string.c
+			check_string.c \
+			edit_stacks.c
 
 OBJS = $(SOURCE:.c=.o)
 
 all: $(NAME)
 
 $(NAME):	$(OBJS)
-	@cd libft;make all
-	@cd libft;make bonus
-	@cd printf;make all
-	@$(CC) $(CFLAGS) $(OBJS) -lft -lftprintf -o $(NAME) -L./libft -L./printf
-	@cd libft;make fclean
-	@cd printf;make fclean
+	-@ cd libft;make all
+	-@ cd libft;make bonus
+	-@ cd printf;make all
+	-@ $(CC) $(CFLAGS) $(OBJS) -lft -lftprintf -o $(NAME) -L./libft -L./printf
+	-@ cd libft;make fclean
+	-@ cd printf;make fclean
 
 clean:
 	$(RM) $(OBJS)
