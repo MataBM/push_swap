@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/08 15:41:14 by bantunes         ###   ########.fr       */
+/*   Created: 2022/02/15 15:09:43 by bantunes          #+#    #+#             */
+/*   Updated: 2022/02/17 10:49:51 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_push_swap.h"
+#include "ft_printf.h"
 
-int main(int arg_n, char **arg_a)
+int	ft_putstr_fc(char *s, int fd)
 {
-	int	*a_stk;
-	t_list *stk;
-	int i;
+	int	i;
 
-	if (arg_n > 1)
-		a_stk = check_string(arg_a);
-	else
+	i = 0;
+	if (!s)
+		return (ft_putstr_fc("(null)", 1));
+	while (s[i])
 	{
-		ft_putstr_fd("argumentos insuficientes\n", 1);
-		return (0);
+		ft_putchar_fc(s[i], fd);
+		i++;
 	}
-	i = -1;
-	stk = NULL;
-	while (a_stk[++i] != NULL)
-		ft_lstadd_back(&stk, ft_lstnew(a_stk[i]));
-	return (0);
+	return (i);
 }

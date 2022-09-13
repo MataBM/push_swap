@@ -12,28 +12,64 @@
 
 #include "lib_push_swap.h"
 
-int	*chartoint(char **arg_a)
+int	*chartoint(char	**arg_a, int size)
 {
 	int i;
 	int j;
-	int *num
+	int *num;
 
-	i = 1;
-	while (!arg_a[i])
+	num = malloc((size) * sizeof(int));
+	i = 0;
+	while (arg_a[++i] != NULL)
 	{
-		j = 0;
-		while (!arg_a[i][j])
+		j = -1;
+		while (arg_a[i][++j] != '\0')
 		{
-			if (ft_isdigit(arg_a[i][j]))
-				num[i - 1] = arg_a[i][j];
+			if (ft_isdigit(arg_a[i][j]) == 0)
+			{
+				ft_printf("Um dos argumentos não é aceitavel\n");
+				free(num);
+				exit(0);
+			}
+		}
+		num[i - 1] = ft_atoi(arg_a[i]);
+	}
+	return (num);
+}
+
+void	check_repeat(int *a_stk, int size)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while ( ++i < size - 1)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if(a_stk[i] == a_stk[j])
+			{
+				ft_printf("argumentos repetidos\n");
+				free(a_stk);
+				exit(0);
+			}
+			j++;
 		}
 	}
 }
 
-int *check_string(char **arg_a)
+int	*check_string(char	**arg_a)
 {
+	int size;
+	int *a_stk;
 	int i;
-	int j;
 
-	chartoint(arg_a);
+	i = 0;
+	size = 0;
+	while (arg_a[++i] != NULL)
+			size++;
+	a_stk = chartoint(arg_a, size);
+	check_repeat(a_stk, size);
+	return (a_stk);
 }

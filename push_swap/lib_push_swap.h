@@ -14,6 +14,9 @@
 # define LIB_PUSH_SWAP
 
 # include "libft/libft.h"
+# include "printf/ft_printf.h"
+
+
 
 int *check_string(char **arg_a);
 

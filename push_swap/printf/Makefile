@@ -5,38 +5,39 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/09/06 15:52:35 by bantunes         ###   ########.fr        #
+#    Created: 2022/02/16 14:14:56 by bantunes          #+#    #+#              #
+#    Updated: 2022/02/17 16:55:15 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = push_swap
+#PROG = test
+NAME = libftprintf.a
 
-CC = cc
-CFlags = -Wall -Wextra -Werror
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+AR = ar rcs
 RM = rm -f
 
-SOURCE	=	main.c \
-			check_string.c
+SRCS =	ft_printf.c \
+    	ft_putnbr_fd.c \
+		ft_strlen.c \
+		ft_putchar_fd.c \
+		ft_putstr_fd.c \
+		process.c \
+		ft_putnbr_base.c
 
-OBJS = $(SOURCE:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME):	$(OBJS)
-	@cd libft;make all
-	@cd libft;make bonus
-	@cd printf;make all
-	@$(CC) $(CFLAGS) $(OBJS) -lft -lftprintf -o $(NAME) -L./libft -L./printf
-	@cd libft;make fclean
-	@cd printf;make fclean
+	$(AR) $(NAME) $(OBJS)
+#	$(CC) -lftprintf $(CFLAGS) $(SRCS) -o $(PROG) -L.
 
 clean:
 	$(RM) $(OBJS)
-	cd libft;make clean
 
-fclean:	clean
-	cd libft;make fclean
+fclean: clean
 	$(RM) $(NAME)
 
 re: fclean $(NAME)

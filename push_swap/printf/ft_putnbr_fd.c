@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/08 15:41:14 by bantunes         ###   ########.fr       */
+/*   Created: 2021/12/13 14:28:18 by bantunes          #+#    #+#             */
+/*   Updated: 2022/02/23 14:39:48 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib_push_swap.h"
+#include "ft_printf.h"
 
-int main(int arg_n, char **arg_a)
+int	ft_putnbr_fc(int n, int fd)
 {
-	int	*a_stk;
-	t_list *stk;
-	int i;
-
-	if (arg_n > 1)
-		a_stk = check_string(arg_a);
+	if (n == 0)
+		return (ft_putchar_fc('0', 1));
+	if (n == -2147483648)
+		return (ft_putstr_fc("-2147483648", fd));
 	else
 	{
-		ft_putstr_fd("argumentos insuficientes\n", 1);
-		return (0);
+		if (n < 0)
+		{
+			write(1, "-", 1);
+			return (ft_putnbr_fc(n * -1, fd) + 1);
+		}
+		else if (n / 10 > 0)
+			return (ft_putnbr_fc(n / 10, fd)
+				+ ft_putchar_fc((n % 10) + '0', fd));
+		else
+			return (ft_putchar_fc((n % 10) + '0', fd));
 	}
-	i = -1;
-	stk = NULL;
-	while (a_stk[++i] != NULL)
-		ft_lstadd_back(&stk, ft_lstnew(a_stk[i]));
 	return (0);
 }
