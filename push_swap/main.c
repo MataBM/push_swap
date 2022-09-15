@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/13 20:41:28 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:17:50 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	printlist(t_list *stk)
 
 int	main(int arg_n, char **arg_a)
 {
-	int	*stk;
+	int		*stk_array;
 	t_list	*stk_a;
 	t_list	*stk_b;
-	int i;
+	int		i;
 
 	if (arg_n > 1)
-		stk = check_string(arg_a);
+		stk_array = check_string(arg_a);
 	else
 	{
 		ft_putstr_fd("Error\nArgumentos insuficientes\n", 1);
@@ -42,22 +42,11 @@ int	main(int arg_n, char **arg_a)
 	i = -1;
 	stk_a = NULL;
 	stk_b = NULL;
-	while (stk[++i] != NULL)
-		ft_lstadd_back(&stk_a, ft_lstnew(stk[i]));
+	while (stk_array[++i] != NULL)
+		ft_lstadd_back(&stk_a, ft_lstnew(stk_array[i]));
+	if (check_if_complete(stk_a, stk_array, i))
+		return (0);
+	less_ten(&stk_a, stk_array, i);
 	printlist(stk_a);
-	editstk_S(&stk_a, 'a', 0);
-	printlist(stk_a);
-	editstk_P(&stk_a, &stk_b, 'b');
-	printlist(stk_a);
-	printlist(stk_b);
-	editstk_P(&stk_a, &stk_b, 'b');
-	printlist(stk_a);
-	printlist(stk_b);
-	editstk_P(&stk_a, &stk_b, 'b');
-	editstk_P(&stk_a, &stk_b, 'b');
-	editstk_P(&stk_a, &stk_b, 'b');
-	editstk_R(&stk_b, "RRB", 0);
-	printlist(stk_a);
-	printlist(stk_b);
 	return (0);
 }

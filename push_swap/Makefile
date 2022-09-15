@@ -6,7 +6,7 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/09/13 15:01:16 by bantunes         ###   ########.fr        #
+#    Updated: 2022/09/15 14:32:04 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ RM = rm -f
 
 SOURCE	=	main.c \
 			check_string.c \
-			edit_stacks.c
+			edit_stacks.c \
+			check_stacks.c \
+			do_push_swap.c
 
 OBJS = $(SOURCE:.c=.o)
 

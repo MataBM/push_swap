@@ -6,13 +6,13 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:25:35 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/13 20:32:36 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/15 17:20:16 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-void	editstk_S(t_list **stk, char c, int limit)
+void	editstk_s(t_list **stk, char c, int limit)
 {
 	t_list	*tmp;
 
@@ -28,7 +28,7 @@ void	editstk_S(t_list **stk, char c, int limit)
 		ft_printf("SB\n");
 }
 
-void	editstk_P(t_list **stk, t_list **dst, char c)
+void	editstk_p(t_list **stk, t_list **dst, char c)
 {
 	t_list	*tmp;
 
@@ -43,23 +43,27 @@ void	editstk_P(t_list **stk, t_list **dst, char c)
 
 void	check_rotate_type(char *type, int limit)
 {
-	if ( type[1] == 'R')
+	if (type[1] == 'R')
+	{
 		if (type[2] == 'A')
 			ft_printf("RRA\n");
 		else if (type[2] == 'B')
 			ft_printf("RRB\n");
 		else
 			ft_printf("RRR\n");
+	}
 	else
+	{
 		if (type[1] == 'A')
 			ft_printf("RA\n");
 		else if (type[1] == 'B')
 			ft_printf("RB\n");
 		else
 			ft_printf("RR\n");
+	}
 }
 
-void	editstk_R(t_list **stk, char *type, int limit)
+void	editstk_r(t_list **stk, char *type, int limit)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
