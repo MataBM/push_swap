@@ -6,7 +6,7 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/16 14:14:56 by bantunes          #+#    #+#              #
-#    Updated: 2022/02/17 16:55:15 by bantunes         ###   ########.fr        #
+#    Updated: 2022/09/20 12:23:10 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ RM = rm -f
 
 SRCS =	ft_printf.c \
     	ft_putnbr_fd.c \
-		ft_strlen.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		process.c \

@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:30 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/15 17:12:16 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:49:54 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	*chartoint(char	**arg_a, int size)
 		j = -1;
 		while (arg_a[i][++j] != '\0')
 		{
-			if (ft_isdigit(arg_a[i][j]) == 0)
+			if (ft_isdigit(arg_a[i][j]) == 0 && (arg_a[i][j] != '-' && ft_isdigit(arg_a[i][j + 1]) == 0))
 			{
 				ft_printf("Error\nUm dos argumentos não é aceitavel\n");
 				free(num);

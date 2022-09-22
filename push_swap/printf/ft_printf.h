@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/15 14:36:48 by bantunes          #+#    #+#             */
-/*   Updated: 2022/02/23 14:30:26 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:23:32 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <unistd.h>
-
-size_t	ft_strlen(const char *s);
 
 int		ft_printf(const char *pillar, ...);
 

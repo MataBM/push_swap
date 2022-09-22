@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/15 17:17:50 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:54:41 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int arg_n, char **arg_a)
 		ft_lstadd_back(&stk_a, ft_lstnew(stk_array[i]));
 	if (check_if_complete(stk_a, stk_array, i))
 		return (0);
-	less_ten(&stk_a, stk_array, i);
-	printlist(stk_a);
+	//linked list quando toda negativa limpa sem motivo ainda ?
+	less_five(&stk_a, &stk_b, i);
 	return (0);
 }

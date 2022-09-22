@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:25:35 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/15 17:20:16 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:27:33 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	editstk_s(t_list **stk, char c, int limit)
 	tmp->next = (*stk)->next;
 	(*stk)->next = tmp;
 	if (c == 'a')
-		ft_printf("SA\n");
+		ft_printf("sa\n");
 	else if (c == 's' && limit != 1)
-		ft_printf("SS\n");
+		ft_printf("ss\n");
 	else
-		ft_printf("SB\n");
+		ft_printf("sb\n");
 }
 
 void	editstk_p(t_list **stk, t_list **dst, char c)
@@ -36,9 +36,9 @@ void	editstk_p(t_list **stk, t_list **dst, char c)
 	*stk = (*stk)->next;
 	ft_lstadd_front(dst, tmp);
 	if (c == 'a')
-		ft_printf("PA\n");
+		ft_printf("pa\n");
 	else
-		ft_printf("PB\n");
+		ft_printf("pb\n");
 }
 
 void	check_rotate_type(char *type, int limit)
@@ -46,20 +46,20 @@ void	check_rotate_type(char *type, int limit)
 	if (type[1] == 'R')
 	{
 		if (type[2] == 'A')
-			ft_printf("RRA\n");
+			ft_printf("rra\n");
 		else if (type[2] == 'B')
-			ft_printf("RRB\n");
+			ft_printf("rrb\n");
 		else
-			ft_printf("RRR\n");
+			ft_printf("rrr\n");
 	}
 	else
 	{
 		if (type[1] == 'A')
-			ft_printf("RA\n");
+			ft_printf("ra\n");
 		else if (type[1] == 'B')
-			ft_printf("RB\n");
+			ft_printf("rb\n");
 		else
-			ft_printf("RR\n");
+			ft_printf("rr\n");
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:05:36 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/15 17:10:55 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:53:40 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,26 @@ int	check_if_complete(t_list *stk, int *stk_array, int size)
 	return (1);
 }
 
-int	find_big_num(t_list *stk, int size)
+void	the_best_way_to_R(t_list **stk, int place, int size, char type)
+{
+	int		half_size;
+
+	half_size = (size / 2);
+	if (place <= half_size)
+		while (place != 0)
+		{
+			editstk_r(stk, "RA", 0);
+			place--;
+		}
+	else
+		while(place < size)
+		{
+			editstk_r(stk, "RRA", 0);
+			place++;
+		}
+}
+
+int	find_big_num(t_list **stk, int size)
 {
 	t_list	*tmp;
 	int		num;
@@ -57,11 +76,12 @@ int	find_big_num(t_list *stk, int size)
 	int		place;
 
 	num = -2147483648;
-	tmp = stk;
+	tmp = *stk;
 	i = 0;
+	
 	while (tmp != NULL)
 	{
-		if (tmp->content > num)
+		if ((int)tmp->content > num)
 		{
 			num = tmp->content;
 			place = i;
@@ -72,7 +92,7 @@ int	find_big_num(t_list *stk, int size)
 	return (place);
 }
 
-int	find_small_num(t_list *stk, int size)
+int	find_small_num(t_list **stk, int size)
 {
 	t_list	*tmp;
 	int		num;
@@ -80,11 +100,11 @@ int	find_small_num(t_list *stk, int size)
 	int		place;
 
 	num = 2147483647;
-	tmp = stk;
+	tmp = *stk;
 	i = 0;
 	while (tmp != NULL)
 	{
-		if (tmp->content < num)
+		if ((int)tmp->content < num)
 		{
 			num = tmp->content;
 			place = i;
@@ -92,5 +112,5 @@ int	find_small_num(t_list *stk, int size)
 		tmp = tmp->next;
 		i++;
 	}
-	return (num);
+	return (place);
 }
