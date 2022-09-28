@@ -6,14 +6,14 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/09/22 16:00:47 by bantunes         ###   ########.fr        #
+#    Updated: 2022/09/28 15:17:04 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 CC = cc
-CFlags = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 RM = rm -f
 
 SOURCE	=	main.c \

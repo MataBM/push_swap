@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:30 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/22 16:49:54 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:52:19 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ int	*check_string(char	**arg_a)
 	int	size;
 	int	*a_stk;
 	int	i;
+	int	h;
+	int	j;
+	int	*stk;
 
 	i = -1;
 	size = 0;
@@ -71,5 +74,10 @@ int	*check_string(char	**arg_a)
 		size++;
 	a_stk = chartoint(arg_a, size);
 	check_repeat(a_stk, size);
-	return (a_stk);
+	stk = malloc((size) * sizeof(int));
+	h = -1;
+	j = -1;
+	while (++h < size)
+		stk[++j] = a_stk[h];
+	return (stk);
 }

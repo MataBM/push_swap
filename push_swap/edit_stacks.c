@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:25:35 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/22 16:27:33 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:37:47 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	editstk_p(t_list **stk, t_list **dst, char c)
 		ft_printf("pb\n");
 }
 
-void	check_rotate_type(char *type, int limit)
+void	check_rotate_type(char *type)
 {
 	if (type[1] == 'R')
 	{
@@ -63,7 +63,7 @@ void	check_rotate_type(char *type, int limit)
 	}
 }
 
-void	editstk_r(t_list **stk, char *type, int limit)
+void	editstk_r(t_list **stk, char *type)
 {
 	t_list	*tmp;
 	t_list	*tmp2;
@@ -86,5 +86,5 @@ void	editstk_r(t_list **stk, char *type, int limit)
 		tmp->next = NULL;
 		ft_lstadd_back(stk, tmp);
 	}
-	check_rotate_type(type, limit);
+	check_rotate_type(type);
 }
