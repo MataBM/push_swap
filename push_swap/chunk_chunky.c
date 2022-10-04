@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:40:56 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/28 12:55:24 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:55:41 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,36 +49,32 @@ int	**get_chuncks(int *stk_array, int size)
 	int	j;
 	int	h;
 
-	chunk = NULL;
 	chuncks = create_chuncks(size);
 	div = size/chuncks;
-	ft_printf("div: %d\n", div);
 	rest = size%chuncks;
-	ft_printf("rest: %d\n", rest);
-	h = -1;
-	while (++h < 20)
-		ft_printf("numero: %d\n", stk_array[h]);
+	if (rest == 0)
+		chunk = malloc((div + 1) * sizeof(int*));
+	else
+		chunk = malloc((div + 2) * sizeof(int*));
 	i = -1;
 	h = -1;
 	while (++i < div)
 	{
 		j = -1;
-		chunk[i] = malloc((chuncks * sizeof(int*)) + 1);
+		chunk[i] = malloc((chuncks + 1) * sizeof(int));
 		while (++j < chuncks)
 		{
-			// ft_printf("array: %d\n", stk_array[++h]);
-			chunk[i][j] = stk_array[h];
-			ft_printf("h: %d\n", h);
-			ft_printf("numero da chunk %d -> %d\n", i, chunk[i][j]);
+			chunk[i][j] = stk_array[++h];
 		}
-		chunk[i][j + 1] = '\0';
+		chunk[i][j] = 0;
 	}
 	if (rest > 0)
 	{
-		chunk[i] = malloc((rest * sizeof(int*)) + 1);
-		while (rest > 0)
-			chunk[i][++j] = *stk_array++;
-		chunk[i][j + 1] = '\0';
+		h++;
+		j = -1;
+		chunk[i] = malloc((rest) * sizeof(int));
+		while (--rest > 0)
+			chunk[i][++j] = stk_array[++h];
 	}
 	return (chunk);
 }

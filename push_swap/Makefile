@@ -6,7 +6,7 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/09/28 15:17:04 by bantunes         ###   ########.fr        #
+#    Updated: 2022/10/04 09:36:40 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SOURCE	=	main.c \
 			edit_stacks.c \
 			check_stacks.c \
 			do_push_swap.c \
-			chunk_chunky.c
+			chunk_chunky.c \
+			program_over.c
 
 OBJS = $(SOURCE:.c=.o)
 

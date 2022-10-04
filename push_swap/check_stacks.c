@@ -6,21 +6,22 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:05:36 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/28 12:45:03 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/04 13:00:14 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-int	*bubble_sort(int *stk_array)
+int	*bubble_sort(int *stk_array, int size)
 {
 	int	i;
 	int	tmp;
 
 	i = -1;
-	while (stk_array[++i] != '\0')
+	ft_printf("size: %d\n", size);
+	while (++i < size - 1)
 	{
-		if (stk_array[i] > stk_array[i + 1] && stk_array[i + 1] != '\0')
+		if (stk_array[i] > stk_array[i + 1])
 		{
 			tmp = stk_array[i];
 			stk_array[i] = stk_array[i + 1];
@@ -31,17 +32,17 @@ int	*bubble_sort(int *stk_array)
 	return (stk_array);
 }
 
-int	check_if_complete(t_list *stk, int *stk_array, int size)
+int	check_if_complete(t_stack *stk, int *stk_array, int size)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 	int		i;
 
 	tmp = stk;
-	stk_array = bubble_sort(stk_array);
+	stk_array = bubble_sort(stk_array, size);
 	i = 1;
 	while (i <= size)
 	{
-		if (stk_array[i] != *(int *) (tmp->content))
+		if (stk_array[i] != *(tmp)->content)
 			return (0);
 		tmp = tmp->next;
 		i++;
@@ -49,7 +50,7 @@ int	check_if_complete(t_list *stk, int *stk_array, int size)
 	return (1);
 }
 
-void	the_best_way_to_R(t_list **stk, int place, int size)
+void	the_best_way_to_R(t_stack **stk, int place, int size)
 {
 	int		half_size;
 
@@ -68,9 +69,9 @@ void	the_best_way_to_R(t_list **stk, int place, int size)
 		}
 }
 
-int	find_big_num(t_list **stk)
+int	find_big_num(t_stack **stk)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 	int		num;
 	int		i;
 	int		place;
@@ -81,9 +82,9 @@ int	find_big_num(t_list **stk)
 	
 	while (tmp != NULL)
 	{
-		if (*(int *)tmp->content > num)
+		if (*(tmp)->content > num)
 		{
-			num = *(int *)tmp->content;
+			num = *(tmp)->content;
 			place = i;
 		}
 		tmp = tmp->next;
@@ -92,9 +93,9 @@ int	find_big_num(t_list **stk)
 	return (place);
 }
 
-int	find_small_num(t_list **stk)
+int	find_small_num(t_stack **stk)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 	int		num;
 	int		i;
 	int		place;
@@ -104,9 +105,9 @@ int	find_small_num(t_list **stk)
 	i = 0;
 	while (tmp != NULL)
 	{
-		if (*(int *)tmp->content < num)
+		if (*(tmp)->content < num)
 		{
-			num = *(int *)tmp->content;
+			num = *(tmp)->content;
 			place = i;
 		}
 		tmp = tmp->next;

@@ -6,15 +6,15 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:25:35 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/28 12:37:47 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/04 09:56:30 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-void	editstk_s(t_list **stk, char c, int limit)
+void	editstk_s(t_stack **stk, char c, int limit)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
 	tmp = *stk;
 	*stk = (*stk)->next;
@@ -28,13 +28,13 @@ void	editstk_s(t_list **stk, char c, int limit)
 		ft_printf("sb\n");
 }
 
-void	editstk_p(t_list **stk, t_list **dst, char c)
+void	editstk_p(t_stack **stk, t_stack **dst, char c)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
 	tmp = *stk;
 	*stk = (*stk)->next;
-	ft_lstadd_front(dst, tmp);
+	ft_addstk_front(dst, tmp);
 	if (c == 'a')
 		ft_printf("pa\n");
 	else
@@ -63,10 +63,10 @@ void	check_rotate_type(char *type)
 	}
 }
 
-void	editstk_r(t_list **stk, char *type)
+void	editstk_r(t_stack **stk, char *type)
 {
-	t_list	*tmp;
-	t_list	*tmp2;
+	t_stack	*tmp;
+	t_stack	*tmp2;
 
 	if (type[1] == 'R')
 	{
@@ -77,14 +77,14 @@ void	editstk_r(t_list **stk, char *type)
 		while (tmp2->next->next != NULL)
 			tmp2 = tmp2->next;
 		tmp2->next = NULL;
-		ft_lstadd_front(stk, tmp);
+		ft_addstk_front(stk, tmp);
 	}
 	else
 	{
 		tmp = *stk;
 		*stk = (*stk)->next;
 		tmp->next = NULL;
-		ft_lstadd_back(stk, tmp);
+		ft_addstk_back(stk, tmp);
 	}
 	check_rotate_type(type);
 }

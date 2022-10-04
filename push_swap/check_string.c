@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:30 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/28 15:52:19 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/04 10:33:25 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,35 @@ int	*chartoint(char	**arg_a, int size)
 	int	i;
 	int	j;
 	int	*num;
+	int	h;
 
-	num = (int *)malloc((size) * sizeof(int));
-	i = 0;
-	while (arg_a[++i] != NULL)
+	h = 0;
+	num = malloc((size + 1) * sizeof(int));
+	printf("%lu\n", (size + 1) * sizeof(int));
+	if (!num)
 	{
-		j = -1;
-		while (arg_a[i][++j] != '\0')
-		{
-			if (ft_isdigit(arg_a[i][j]) == 0 && (arg_a[i][j] != '-' && ft_isdigit(arg_a[i][j + 1]) == 0))
-			{
-				ft_printf("Error\nUm dos argumentos não é aceitavel\n");
-				free(num);
-				exit(0);
-			}
-		}
-		num[i - 1] = ft_atoi(arg_a[i]);
+		ft_printf("Error\nUm dos argumentos não é aceitavel\n");
+		exit(0);
 	}
+	else
+	{
+		i = 0;
+		while (arg_a[++i])
+		{
+			j = -1;
+			while (arg_a[i][++j])
+			{
+				if (ft_isdigit(arg_a[i][j]) == 0 && (arg_a[i][j] != '-' && ft_isdigit(arg_a[i][j + 1]) == 0))
+				{
+					write(2, "Error\nUm dos argumentos não é aceitavel\n", 40);
+					free_arrays(num, 1);
+				}
+			}
+			num[h] = ft_atoi(arg_a[i]);
+			ft_printf("atoi: %d\n", num[h++]);
+		}
+	}
+	num[h] = 0;
 	return (num);
 }
 
@@ -50,9 +62,8 @@ void	check_repeat(int *a_stk, int size)
 		{
 			if (a_stk[i] == a_stk[j])
 			{
-				ft_printf("Error\nArgumentos repetidos\n");
-				free(a_stk);
-				exit(0);
+				write(2, "Error\nArgumentos repetidos\n", 27);
+				free_arrays(a_stk, 1);
 			}
 			j++;
 		}
@@ -64,20 +75,12 @@ int	*check_string(char	**arg_a)
 	int	size;
 	int	*a_stk;
 	int	i;
-	int	h;
-	int	j;
-	int	*stk;
 
 	i = -1;
 	size = 0;
-	while (arg_a[++i] != NULL)
+	while (arg_a[++i + 1])
 		size++;
 	a_stk = chartoint(arg_a, size);
 	check_repeat(a_stk, size);
-	stk = malloc((size) * sizeof(int));
-	h = -1;
-	j = -1;
-	while (++h < size)
-		stk[++j] = a_stk[h];
-	return (stk);
+	return (a_stk);
 }
