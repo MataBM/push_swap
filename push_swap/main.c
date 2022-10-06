@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/04 12:59:43 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/06 17:01:12 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	printlist(t_stack *stk)
 	tmp = stk;
 	while (tmp != NULL)
 	{
-		ft_printf("%d ", *(tmp->content));
+		ft_printf("%d ", tmp->content);
 		tmp = tmp->next;
 	}
 	ft_printf("\n");
@@ -33,7 +33,6 @@ void	ft_addstk_front(t_stack **lst, t_stack *new)
 		*lst = new;
 	}
 }
-
 
 void	ft_addstk_back(t_stack **lst, t_stack *new)
 {
@@ -57,18 +56,18 @@ t_stack	*ft_newstk(int *content)
 	elt = (t_stack *)malloc(sizeof(*elt));
 	if (!elt)
 		return (NULL);
-	elt->content = content;
+	elt->content = *content;
 	elt->next = NULL;
 	return (elt);
 }
 
 int	main(int arg_n, char **arg_a)
 {
-	int				**chunk;
-	int				*stk_array;
-	t_stack			*stk_a;
-	t_stack			*stk_b;
-	int				i;
+	int		**chunk;
+	int		*stk_array;
+	t_stack	*stk_a;
+	t_stack	*stk_b;
+	int		i;
 
 	stk_array = NULL;
 	stk_a = NULL;
@@ -83,12 +82,9 @@ int	main(int arg_n, char **arg_a)
 		}
 	}
 	else
-	{
 		write(0, "ERRO\nNOT ENOUGH ARGUMENTS\n", 26);
-	}
 	if (check_if_complete(stk_a, stk_array, i))
 		return (0);
-	//linked list quando toda negativa limpa sem motivo ainda ?
 	if (arg_n <= 6)
 		less_five(&stk_a, &stk_b, i);
 	else
@@ -96,6 +92,7 @@ int	main(int arg_n, char **arg_a)
 		chunk = get_chuncks(stk_array, i);
 	}
 	printlist(stk_a);
+	printlist(stk_b);
 	free_arrays(stk_array, 0);
 	free_stk(stk_a, NULL);
 	return (0);

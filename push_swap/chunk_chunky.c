@@ -6,13 +6,13 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:40:56 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/04 12:55:41 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:44:18 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-int create_chuncks(int size)
+int	create_chuncks(int size)
 {
 	int	chunks;
 
@@ -39,26 +39,15 @@ int create_chuncks(int size)
 	return (chunks);
 }
 
-int	**get_chuncks(int *stk_array, int size)
+int	**get_chuncks2(int *stk_array, t_div div, int chuncks, int **chunk)
 {
-	int	**chunk;
-	int	chuncks;
-	int	div;
-	int	rest;
 	int	i;
 	int	j;
 	int	h;
 
-	chuncks = create_chuncks(size);
-	div = size/chuncks;
-	rest = size%chuncks;
-	if (rest == 0)
-		chunk = malloc((div + 1) * sizeof(int*));
-	else
-		chunk = malloc((div + 2) * sizeof(int*));
 	i = -1;
 	h = -1;
-	while (++i < div)
+	while (++i < div.div)
 	{
 		j = -1;
 		chunk[i] = malloc((chuncks + 1) * sizeof(int));
@@ -68,13 +57,30 @@ int	**get_chuncks(int *stk_array, int size)
 		}
 		chunk[i][j] = 0;
 	}
-	if (rest > 0)
+	if (div.rest > 0)
 	{
 		h++;
 		j = -1;
-		chunk[i] = malloc((rest) * sizeof(int));
-		while (--rest > 0)
+		chunk[i] = malloc((div.rest) * sizeof(int));
+		while (--div.rest > 0)
 			chunk[i][++j] = stk_array[++h];
 	}
+	return (chunk);
+}
+
+int	**get_chuncks(int *stk_array, int size)
+{
+	int		**chunk;
+	int		chuncks;
+	t_div	div;
+
+	chuncks = create_chuncks(size);
+	div.div = size / chuncks;
+	div.rest = size % chuncks;
+	if (div.rest == 0)
+		chunk = malloc((div.div + 1) * sizeof(int *));
+	else
+		chunk = malloc((div.div + 2) * sizeof(int *));
+	chunk = get_chuncks2(stk_array, div, chuncks, chunk);
 	return (chunk);
 }

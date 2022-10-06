@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:05:36 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/04 13:00:14 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:54:03 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	*bubble_sort(int *stk_array, int size)
 	int	tmp;
 
 	i = -1;
-	ft_printf("size: %d\n", size);
 	while (++i < size - 1)
 	{
 		if (stk_array[i] > stk_array[i + 1])
@@ -42,7 +41,7 @@ int	check_if_complete(t_stack *stk, int *stk_array, int size)
 	i = 1;
 	while (i <= size)
 	{
-		if (stk_array[i] != *(tmp)->content)
+		if (stk_array[i] != tmp->content)
 			return (0);
 		tmp = tmp->next;
 		i++;
@@ -50,23 +49,27 @@ int	check_if_complete(t_stack *stk, int *stk_array, int size)
 	return (1);
 }
 
-void	the_best_way_to_R(t_stack **stk, int place, int size)
+void	the_best_way_to_r(t_stack **stk, int place, int size)
 {
 	int		half_size;
 
 	half_size = (size / 2);
 	if (place <= half_size)
+	{
 		while (place != 0)
 		{
 			editstk_r(stk, "RA");
 			place--;
 		}
+	}
 	else
-		while(place < size)
+	{
+		while (place < size)
 		{
 			editstk_r(stk, "RRA");
 			place++;
 		}
+	}
 }
 
 int	find_big_num(t_stack **stk)
@@ -79,12 +82,11 @@ int	find_big_num(t_stack **stk)
 	num = -2147483648;
 	tmp = *stk;
 	i = 0;
-	
 	while (tmp != NULL)
 	{
-		if (*(tmp)->content > num)
+		if (tmp->content > num)
 		{
-			num = *(tmp)->content;
+			num = tmp->content;
 			place = i;
 		}
 		tmp = tmp->next;
@@ -105,9 +107,9 @@ int	find_small_num(t_stack **stk)
 	i = 0;
 	while (tmp != NULL)
 	{
-		if (*(tmp)->content < num)
+		if (tmp->content < num)
 		{
-			num = *(tmp)->content;
+			num = tmp->content;
 			place = i;
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:30 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/04 10:33:25 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:49:30 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	*chartoint(char	**arg_a, int size)
 
 	h = 0;
 	num = malloc((size + 1) * sizeof(int));
-	printf("%lu\n", (size + 1) * sizeof(int));
 	if (!num)
 	{
 		ft_printf("Error\nUm dos argumentos não é aceitavel\n");
@@ -35,14 +34,15 @@ int	*chartoint(char	**arg_a, int size)
 			j = -1;
 			while (arg_a[i][++j])
 			{
-				if (ft_isdigit(arg_a[i][j]) == 0 && (arg_a[i][j] != '-' && ft_isdigit(arg_a[i][j + 1]) == 0))
+				if (ft_isdigit(arg_a[i][j]) == 0 &&
+						(arg_a[i][j] != '-' &&
+						ft_isdigit(arg_a[i][j + 1]) == 0))
 				{
 					write(2, "Error\nUm dos argumentos não é aceitavel\n", 40);
 					free_arrays(num, 1);
 				}
 			}
-			num[h] = ft_atoi(arg_a[i]);
-			ft_printf("atoi: %d\n", num[h++]);
+			num[h++] = ft_atoi(arg_a[i]);
 		}
 	}
 	num[h] = 0;

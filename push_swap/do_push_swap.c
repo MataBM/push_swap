@@ -6,20 +6,20 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:20 by bantunes          #+#    #+#             */
-/*   Updated: 2022/09/28 12:47:07 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/06 16:54:15 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib_push_swap.h"
 
-void	five_it_is(t_list **stk, t_list **stk_b, int size)
+void	five_it_is(t_stack **stk, t_stack **stk_b, int size)
 {
 	if (size <= 5)
 	{
-		the_best_way_to_R(stk, find_small_num(stk), size);
+		the_best_way_to_r(stk, find_small_num(stk), size);
 		editstk_p(stk, stk_b, 'b');
 		size--;
-		the_best_way_to_R(stk, find_small_num(stk), size);
+		the_best_way_to_r(stk, find_small_num(stk), size);
 		editstk_p(stk, stk_b, 'b');
 		less_five(stk, stk_b, 3);
 		editstk_p(stk_b, stk, 'a');
@@ -27,7 +27,7 @@ void	five_it_is(t_list **stk, t_list **stk_b, int size)
 	}
 }
 
-void	less_five(t_list **stk, t_list **stk_b, int size)
+void	less_five(t_stack **stk, t_stack **stk_b, int size)
 {
 	if (size == 2)
 		editstk_s(stk, 'a', 0);
@@ -53,3 +53,7 @@ void	less_five(t_list **stk, t_list **stk_b, int size)
 	else
 		five_it_is(stk, stk_b, size);
 }
+
+// void	do_sort(t_stack **stk, t_stack **stk_b, int size)
+// {
+// }
