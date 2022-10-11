@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 09:37:12 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 16:44:51 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 09:50:30 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	free_stk(t_stack *stk, void (*del)(void *))
 		return ;
 	free_stk(stk->next, NULL);
 	if (del)
-		del(stk->content);
+		del(&stk->content);
 	free(stk);
 }

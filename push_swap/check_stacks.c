@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:05:36 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 16:54:03 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:05:29 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_if_complete(t_stack *stk, int *stk_array, int size)
 	return (1);
 }
 
-void	the_best_way_to_r(t_stack **stk, int place, int size)
+void	the_best_way_to_r(t_stack **stk, int place, int size, char c)
 {
 	int		half_size;
 
@@ -58,7 +58,10 @@ void	the_best_way_to_r(t_stack **stk, int place, int size)
 	{
 		while (place != 0)
 		{
-			editstk_r(stk, "RA");
+			if (c == 'a')
+				editstk_r(stk, "RA");
+			else
+				editstk_r(stk, "RB");
 			place--;
 		}
 	}
@@ -66,7 +69,10 @@ void	the_best_way_to_r(t_stack **stk, int place, int size)
 	{
 		while (place < size)
 		{
-			editstk_r(stk, "RRA");
+			if (c == 'a')
+				editstk_r(stk, "RRA");
+			else
+				editstk_r(stk, "RRB");
 			place++;
 		}
 	}

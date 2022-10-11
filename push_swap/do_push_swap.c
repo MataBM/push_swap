@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:20 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 16:54:15 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:19:05 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	five_it_is(t_stack **stk, t_stack **stk_b, int size)
 {
 	if (size <= 5)
 	{
-		the_best_way_to_r(stk, find_small_num(stk), size);
+		the_best_way_to_r(stk, find_small_num(stk), size, 'a');
 		editstk_p(stk, stk_b, 'b');
 		size--;
-		the_best_way_to_r(stk, find_small_num(stk), size);
+		the_best_way_to_r(stk, find_small_num(stk), size, 'a');
 		editstk_p(stk, stk_b, 'b');
 		less_five(stk, stk_b, 3);
 		editstk_p(stk_b, stk, 'a');
@@ -54,6 +54,100 @@ void	less_five(t_stack **stk, t_stack **stk_b, int size)
 		five_it_is(stk, stk_b, size);
 }
 
-// void	do_sort(t_stack **stk, t_stack **stk_b, int size)
-// {
-// }
+int	scan_top(t_stack *stk, int **chuncks, int size, int num_chk)
+{
+	t_stack	*tmp;
+	int		i;
+	int		j;
+	int		hold_first;
+	int		chk;
+
+	i = -1;
+	chk = create_chuncks(size);
+	tmp = stk;
+	hold_first = (size / 2) + 1;
+	while (++i <= (size / 2))
+	{
+		j = -1;
+		while (++j < chk)
+		{
+			if (chuncks[num_chk][j] == tmp->content)
+			{
+				hold_first = i;
+				return (hold_first);
+			}
+		}
+			tmp = tmp->next;
+	}
+	return (hold_first);
+}
+
+int	scan_bot(t_stack *stk, int **chuncks, int size, int num_chk)
+{
+	t_stack	*tmp;
+	int		i;
+	int		j;
+	int		hold_second;
+	int		chk;
+
+	i = size;
+	chk = create_chuncks(size);
+	tmp = stk;
+	hold_second = (size / 2) + 1;
+	while (--size > (i / 2))
+	{
+		j = -1;
+		while (++j < chk)
+		{
+			if (chuncks[num_chk][j] == tmp->content)
+			{
+				hold_second = i - size;
+				return (hold_second);
+			}
+		}
+			tmp = tmp->next;
+	}
+	return (hold_second);
+}
+
+void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
+{
+	t_div	div;
+	int		hold_first;
+	int		hold_second;
+	int		i;
+	int		j;
+
+	div.chuncks = create_chuncks(size);
+	div.div = size / div.chuncks;
+	div.rest = size % div.chuncks;
+	div.size_a = size;
+	div.size_b = 0;
+	i = -1;
+	while (div.div > ++i)
+	{
+		j = -1;
+			while (++j < div.chuncks)
+			{
+				printlist(*stk);
+				hold_first = scan_top(*stk, chunks, div.size_a, i);
+				hold_second = scan_bot(*stk, chunks, div.size_a, i);
+				ft_printf("hold first: %d\nhold second: %d\n", hold_first, hold_second);
+				if (hold_first <= hold_second)
+					the_best_way_to_r(stk, hold_first, div.size_a, 'a');
+				else
+					the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
+				editstk_p(stk, stk_b, 'b');
+				div.size_a--;
+				div.size_b++;
+			}
+	}
+	j = j * div.div;
+	while (--j > -1)
+	{
+		the_best_way_to_r(stk_b, find_big_num(stk_b), div.size_b, 'a');
+		editstk_p(stk_b, stk, 'a');
+		div.size_a++;
+		div.size_b--;
+	}
+}

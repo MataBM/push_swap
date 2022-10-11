@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:40:56 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 16:44:18 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:36:45 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	create_chuncks(int size)
 	return (chunks);
 }
 
-int	**get_chuncks2(int *stk_array, t_div div, int chuncks, int **chunk)
+int	**get_chuncks2(int *stk_array, t_div div, int **chunk)
 {
 	int	i;
 	int	j;
@@ -50,18 +50,16 @@ int	**get_chuncks2(int *stk_array, t_div div, int chuncks, int **chunk)
 	while (++i < div.div)
 	{
 		j = -1;
-		chunk[i] = malloc((chuncks + 1) * sizeof(int));
-		while (++j < chuncks)
-		{
+		chunk[i] = malloc((div.chuncks + 1) * sizeof(int));
+		while (++j < div.chuncks)
 			chunk[i][j] = stk_array[++h];
-		}
 		chunk[i][j] = 0;
 	}
 	if (div.rest > 0)
 	{
 		h++;
 		j = -1;
-		chunk[i] = malloc((div.rest) * sizeof(int));
+		chunk[i] = malloc((div.rest + 1) * sizeof(int));
 		while (--div.rest > 0)
 			chunk[i][++j] = stk_array[++h];
 	}
@@ -71,16 +69,15 @@ int	**get_chuncks2(int *stk_array, t_div div, int chuncks, int **chunk)
 int	**get_chuncks(int *stk_array, int size)
 {
 	int		**chunk;
-	int		chuncks;
 	t_div	div;
 
-	chuncks = create_chuncks(size);
-	div.div = size / chuncks;
-	div.rest = size % chuncks;
+	div.chuncks = create_chuncks(size);
+	div.div = size / div.chuncks;
+	div.rest = size % div.chuncks;
 	if (div.rest == 0)
 		chunk = malloc((div.div + 1) * sizeof(int *));
 	else
 		chunk = malloc((div.div + 2) * sizeof(int *));
-	chunk = get_chuncks2(stk_array, div, chuncks, chunk);
+	chunk = get_chuncks2(stk_array, div, chunk);
 	return (chunk);
 }

@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:26 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 16:52:20 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 15:17:50 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_stack
 
 typedef struct s_div
 {
+	int	size_b;
+	int	size_a;
 	int	div;
 	int	rest;
 	int	chuncks;
@@ -39,13 +41,14 @@ int		check_if_complete(t_stack *stk,
 void	less_five(t_stack **stk, t_stack **stk_b, int size);
 int		find_small_num(t_stack **stk);
 int		find_big_num(t_stack **stk);
-void	the_best_way_to_r(t_stack **stk, int place, int size);
+void	the_best_way_to_r(t_stack **stk, int place, int size, char c);
 int		**get_chuncks(int *stk_array, int size);
 int		*bubble_sort(int *stk_array, int size);
 void	free_arrays(int *array, int num);
 void	free_stk(t_stack *stk, void (*del)(void *));
 void	ft_addstk_front(t_stack **lst, t_stack *new);
 void	ft_addstk_back(t_stack **lst, t_stack *new);
-void	do_sort(t_stack **stk, t_stack **stk_b, int size);
+void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size);
+int		create_chuncks(int size);
 
 #endif

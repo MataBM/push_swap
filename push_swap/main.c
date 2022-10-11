@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/06 17:01:12 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/11 14:31:20 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	main(int arg_n, char **arg_a)
 	else
 	{
 		chunk = get_chuncks(stk_array, i);
+		do_sort(&stk_a, &stk_b, chunk, i);
 	}
 	printlist(stk_a);
 	printlist(stk_b);
