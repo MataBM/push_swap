@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:26 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/11 15:17:50 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/18 12:34:32 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	ft_addstk_front(t_stack **lst, t_stack *new);
 void	ft_addstk_back(t_stack **lst, t_stack *new);
 void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size);
 int		create_chuncks(int size);
+int		**get_chuncks2(int *stk_array, t_div div, int **chunk);
+void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size);
 
 #endif

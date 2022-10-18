@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 17:02:20 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/11 15:19:05 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/18 15:57:43 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,10 +129,8 @@ void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 		j = -1;
 			while (++j < div.chuncks)
 			{
-				printlist(*stk);
 				hold_first = scan_top(*stk, chunks, div.size_a, i);
 				hold_second = scan_bot(*stk, chunks, div.size_a, i);
-				ft_printf("hold first: %d\nhold second: %d\n", hold_first, hold_second);
 				if (hold_first <= hold_second)
 					the_best_way_to_r(stk, hold_first, div.size_a, 'a');
 				else
@@ -142,10 +140,26 @@ void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 				div.size_b++;
 			}
 	}
-	j = j * div.div;
+	if (div.rest > 0)
+	{
+		j = -1;
+		while (++j < div.rest)
+		{
+			hold_first = scan_top(*stk, chunks, div.size_a, i);
+			hold_second = scan_bot(*stk, chunks, div.size_a, i);
+			if (hold_first <= hold_second)
+				the_best_way_to_r(stk, hold_first, div.size_a, 'a');
+			else
+				the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
+			editstk_p(stk, stk_b, 'b');
+			div.size_a--;
+			div.size_b++;
+		}
+	}
+	j = (div.div * div.chuncks) + div.rest;
 	while (--j > -1)
 	{
-		the_best_way_to_r(stk_b, find_big_num(stk_b), div.size_b, 'a');
+		the_best_way_to_r(stk_b, find_big_num(stk_b), div.size_b, 'b');
 		editstk_p(stk_b, stk, 'a');
 		div.size_a++;
 		div.size_b--;
