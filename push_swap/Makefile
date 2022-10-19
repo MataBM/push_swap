@@ -6,7 +6,7 @@
 #    By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/06 15:43:47 by bantunes          #+#    #+#              #
-#    Updated: 2022/10/18 15:56:28 by bantunes         ###   ########.fr        #
+#    Updated: 2022/10/19 12:37:57 by bantunes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 RM = rm -f
 
-SOURCE	=	main.c \
-			check_string.c \
+SOURCE	=	check_string.c \
 			edit_stacks.c \
 			check_stacks.c \
 			do_push_swap.c \
 			chunk_chunky.c \
+			main.c \
 			program_over.c
 
 OBJS = $(SOURCE:.c=.o)

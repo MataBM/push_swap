@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:40:56 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/11 14:36:45 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/19 17:19:00 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,24 @@ int	create_chuncks(int size)
 {
 	int	chunks;
 
-	if (size <= 50)
-		chunks = 10;
-	else if (size <= 100)
+	if (size <= 100)
 		chunks = 20;
-	else if (size <= 150)
-		chunks = 30;
-	else if (size <= 200)
-		chunks = 40;
-	else if (size <= 250)
-		chunks = 50;
-	else if (size <= 300)
-		chunks = 60;
-	else if (size <= 350)
-		chunks = 70;
-	else if (size <= 400)
-		chunks = 80;
-	else if (size <= 450)
-		chunks = 90;
+	// else if (size <= 150)
+	// 	chunks = 5;
+	// else if (size <= 200)
+	// 	chunks = 5;
+	// else if (size <= 250)
+	// 	chunks = 5;
+	// else if (size <= 300)
+	// 	chunks = 5;
+	// else if (size <= 350)
+	// 	chunks = 5;
+	// else if (size <= 400)
+	// 	chunks = 5;
+	// else if (size <= 450)
+	// 	chunks = 5;
 	else
-		chunks = 100;
+		chunks = 45;
 	return (chunks);
 }
 

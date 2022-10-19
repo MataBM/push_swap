@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:33 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/18 12:54:04 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:36:03 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	main(int arg_n, char **arg_a)
 	t_stack	*stk_a;
 	t_stack	*stk_b;
 	int		i;
+	// int		a;
+	// int		b;
 
 	stk_array = NULL;
 	stk_a = NULL;
@@ -76,7 +78,7 @@ int	main(int arg_n, char **arg_a)
 	if (arg_n > 2)
 	{
 		stk_array = check_string(arg_a);
-		while (stk_array[++i])
+		while (++i < arg_n - 1)
 		{
 			ft_addstk_back(&stk_a, ft_newstk(&stk_array[i]));
 		}
@@ -92,6 +94,13 @@ int	main(int arg_n, char **arg_a)
 		chunk = get_chuncks(stk_array, i);
 		do_sort(&stk_a, &stk_b, chunk, i);
 	}
+	// a = -1;
+	// while (++a < arg_n - 1)
+	// {
+	// 	b = -1;
+	// 	while (++b < 30)
+	// 		ft_printf("chunck[%d]: %d\n", a + 1, chunk[a][b]);
+	// }
 	// printlist(stk_a);
 	// printlist(stk_b);
 	free_arrays(stk_array, 0);
