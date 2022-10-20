@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:26 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/19 16:47:43 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/20 20:46:26 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_div
 	int	div;
 	int	rest;
 	int	chuncks;
+	int	small_num;
+	int	big_num;
 }	t_div;
 
 int		*check_string(char **arg_a);
@@ -70,6 +72,6 @@ int		create_chuncks(int size);
 
 int		get_last_num(t_stack *stk, int position);
 
-int	find_big_num_reverse(t_stack **stk, int size);
+int		find_big_num_reverse(t_stack **stk, int size);
 
 #endif
