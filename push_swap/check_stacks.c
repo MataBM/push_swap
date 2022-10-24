@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:05:36 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/20 18:33:09 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:36:20 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,26 @@ int	find_big_num_reverse(t_stack **stk, int size)
 			num = get_last_num(tmp, i);
 			place = i;
 		}
+	}
+	return (place);
+}
+
+int	find_num(t_stack **stk, int num)
+{
+	t_stack	*tmp;
+	int		i;
+	int		place;
+
+	tmp = *stk;
+	i = 0;
+	while (tmp != NULL)
+	{
+		if (tmp->content == num)
+		{
+			place = i;
+		}
+		tmp = tmp->next;
+		i++;
 	}
 	return (place);
 }

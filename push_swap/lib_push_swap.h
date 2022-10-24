@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 15:43:26 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/20 20:46:26 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/24 11:36:45 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int		create_chuncks(int size);
 int		get_last_num(t_stack *stk, int position);
 
 int		find_big_num_reverse(t_stack **stk, int size);
+
+int	find_num(t_stack **stk, int num);
 
 #endif

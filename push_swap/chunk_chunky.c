@@ -6,7 +6,7 @@
 /*   By: bantunes <bantunes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 11:40:56 by bantunes          #+#    #+#             */
-/*   Updated: 2022/10/20 18:15:27 by bantunes         ###   ########.fr       */
+/*   Updated: 2022/10/24 16:22:32 by bantunes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	create_chuncks(int size)
 	int	chunks;
 
 	if (size <= 100)
-		chunks = 20;
+		chunks = 37;
 	// else if (size <= 150)
 	// 	chunks = 5;
 	// else if (size <= 200)
@@ -33,7 +33,7 @@ int	create_chuncks(int size)
 	// else if (size <= 450)
 	// 	chunks = 5;
 	else
-		chunks = 46;
+		chunks = 47;
 	return (chunks);
 }
 
