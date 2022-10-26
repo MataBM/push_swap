@@ -121,40 +121,62 @@ int	scan_bot(t_stack *stk, int **chuncks, int size, int num_chk)
 	return (hold_second - 1);
 }
 
-int	check_num(t_stack **stk, t_stack **stk_b,	int **chunks, t_div div)
+int	check_stk(t_stack *stk_b, int	num, t_div div)
+{
+	t_stack	*tmp;
+	int		i;
+
+	i = -1;
+	tmp = stk_b;
+	while (++i < div.size_b)
+	{
+		if (num == tmp->content)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
+int	check_num(int num, t_stack *stk_b, int **chunks, t_div div)
 {
 	int		i;
 	int		j;
 	int		h;
-	t_stack	*tmp;
+	int		*the_num;
 
 	i = -1;
-	h = 1;
-	tmp = *stk_b;
-	while (++i < div.div)
+	h = -1;
+	the_num = malloc((div.size_b + div.size_a) * sizeof(int*));
+	while (++i < div.div )
 	{
 		j = -1;
-		while (++j < div.size_b || j < div.chuncks)
+		while (++j < div.chuncks)
 		{
-			if (chunks[i][j] == (*stk)->content)
-			{
-				while (chunks[i][j + h] != tmp->content || (j + h < div.chuncks && j + h < div.size_b))
-				{
-					if (tmp->next == NULL)
-					{
-						tmp = *stk_b;
-						h++;
-					}
-					tmp = tmp->next;
-				}
-				// ft_printf("chunks[%d]: %d\n", i, chunks[i][j + h]);
-				if (chunks[i][j + h] == tmp->content)
-					the_best_way_to_r(stk_b, find_num(stk_b, chunks[i][j + h]), div.size_b, 'b');
-				return (0);
-			}
+			if (h >= 0)
+				the_num[h++] = chunks[i][j];
+			if (chunks[i][j] == num)
+				h++;
 		}
 	}
-	return (0);
+	if (div.rest > 0)
+	{
+		j = -1;
+		while (++j < div.rest)
+		{
+			if (h >= 0)
+				the_num[h++] = chunks[i][j];
+			if (chunks[i][j] == num)
+				h++;
+		}
+	}
+	i = -1;
+	while (h > ++i)
+	{
+		// ft_printf("the_num: %d\n", the_num[i]);
+		if (!check_stk(stk_b, the_num[i], div))
+			return (the_num[i]);
+	}
+	return (1);
 }
 
 void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
@@ -185,10 +207,14 @@ void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 				else
 					the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
 				if (div.size_b > 2)
-					check_num(stk, stk_b, chunks, div);
+				{
+					// printlist(*stk_b);
+					the_best_way_to_r(stk_b, find_num(stk_b, check_num((*stk)->content, *stk_b, chunks, div)), div.size_b, 'b');
+				}
 				editstk_p(stk, stk_b, 'b');
 				div.size_a--;
 				div.size_b++;
+				// the_best_way_to_r(stk_b, find_small_num(stk_b), div.size_b, 'b');
 			}
 	}
 	if (div.rest > 0)
@@ -203,19 +229,19 @@ void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 			else
 				the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
 			if (div.size_b != 0)
-				// check_num(stk, stk_b, chunks, div);
+				the_best_way_to_r(stk_b, find_num(stk_b, check_num((*stk)->content, *stk_b, chunks, div)), div.size_b, 'b');
 			editstk_p(stk, stk_b, 'b');
 			div.size_a--;
 			div.size_b++;
+			// the_best_way_to_r(stk_b, find_small_num(stk_b), div.size_b, 'b');
 		}
 	}
-	// printlist(*stk_b);
+	printlist(*stk_b);
 	j = (div.div * div.chuncks) + div.rest;
 	while (--j > -1)
 	{
 		the_best_way_to_r(stk_b, find_big_num(stk_b), div.size_b, 'b');
 		editstk_p(stk_b, stk, 'a');
-		// printlist(*stk_b);
 		div.size_a++;
 		div.size_b--;
 	}
