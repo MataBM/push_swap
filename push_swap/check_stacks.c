@@ -51,12 +51,9 @@ int	check_if_complete(t_stack *stk, int *stk_array, int size)
 
 void	the_best_way_to_r(t_stack **stk, int place, int size, char c)
 {
-	int		half_size;
-
-	half_size = (size / 2);
-	if (place <= half_size)
+	if (place <= (size / 2))
 	{
-		while (place != 0)
+		while (place > 0)
 		{
 			if (c == 'a')
 				editstk_r(stk, "RA");

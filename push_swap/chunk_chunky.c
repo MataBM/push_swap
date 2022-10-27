@@ -17,23 +17,9 @@ int	create_chuncks(int size)
 	int	chunks;
 
 	if (size <= 100)
-		chunks = 37;
-	// else if (size <= 150)
-	// 	chunks = 5;
-	// else if (size <= 200)
-	// 	chunks = 5;
-	// else if (size <= 250)
-	// 	chunks = 5;
-	// else if (size <= 300)
-	// 	chunks = 5;
-	// else if (size <= 350)
-	// 	chunks = 5;
-	// else if (size <= 400)
-	// 	chunks = 5;
-	// else if (size <= 450)
-	// 	chunks = 5;
+		chunks = 20;
 	else
-		chunks = 47;
+		chunks = 20;
 	return (chunks);
 }
 

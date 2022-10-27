@@ -29,8 +29,8 @@ typedef struct s_div
 	int	div;
 	int	rest;
 	int	chuncks;
-	int	small_num;
-	int	big_num;
+	int	hold_first;
+	int	hold_second;
 }	t_div;
 
 int		*check_string(char **arg_a);

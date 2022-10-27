@@ -118,72 +118,49 @@ int	scan_bot(t_stack *stk, int **chuncks, int size, int num_chk)
 			}
 		}
 	}
-	return (hold_second - 1);
+	return (hold_second);
 }
 
-int	check_stk(t_stack *stk_b, int	num, t_div div)
+int	*put_string(t_stack *stk_b, int *check, t_div div)
 {
-	t_stack	*tmp;
 	int		i;
+	t_stack	*tmp;
 
-	i = -1;
 	tmp = stk_b;
+	check = malloc(div.size_b * sizeof(int*));
+	i = -1;
 	while (++i < div.size_b)
 	{
-		if (num == tmp->content)
-			return (0);
+		check[i] = tmp->content;
 		tmp = tmp->next;
 	}
-	return (1);
+	return(check);
 }
 
-int	check_num(int num, t_stack *stk_b, int **chunks, t_div div)
+int	check_num(int num, t_stack *stk_b, t_div div)
 {
-	int		i;
-	int		j;
-	int		h;
-	int		*the_num;
+	int	i;
+	int	*check;
 
+	check = NULL;
+	check = put_string(stk_b, check, div);
 	i = -1;
-	h = -1;
-	the_num = malloc((div.size_b + div.size_a) * sizeof(int*));
-	while (++i < div.div )
+	while (++i < div.size_b)
 	{
-		j = -1;
-		while (++j < div.chuncks)
-		{
-			if (h >= 0)
-				the_num[h++] = chunks[i][j];
-			if (chunks[i][j] == num)
-				h++;
-		}
+		// ft_printf("check: %d < num: %d < check: %d\ni = %d\n", check[i], num, check[i + 1], i);
+		if (check[i] < num && check[i + 1] > num)
+			return (i + 1);
+		else if (i + 1 == div.size_b)
+			return (i + 1);
+		else if (check[i] > num && check[0] > num)
+			return (i);
 	}
-	if (div.rest > 0)
-	{
-		j = -1;
-		while (++j < div.rest)
-		{
-			if (h >= 0)
-				the_num[h++] = chunks[i][j];
-			if (chunks[i][j] == num)
-				h++;
-		}
-	}
-	i = -1;
-	while (h > ++i)
-	{
-		// ft_printf("the_num: %d\n", the_num[i]);
-		if (!check_stk(stk_b, the_num[i], div))
-			return (the_num[i]);
-	}
-	return (1);
+	return (0);
 }
 
 void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 {
 	t_div	div;
-	int		hold_first;
-	int		hold_second;
 	int		i;
 	int		j;
 
@@ -192,51 +169,57 @@ void	do_sort(t_stack **stk, t_stack **stk_b, int **chunks, int size)
 	div.rest = size % div.chuncks;
 	div.size_a = size;
 	div.size_b = 0;
-	div.small_num = 2147483647;
-	div.big_num = -2147483648;
 	i = -1;
 	while (div.div > ++i)
 	{
 		j = -1;
-			while (++j < div.chuncks)
-			{
-				hold_first = scan_top(*stk, chunks, div.size_a, i);
-				hold_second = scan_bot(*stk, chunks, div.size_a, i);
-				if (hold_first <= hold_second)
-					the_best_way_to_r(stk, hold_first, div.size_a, 'a');
-				else
-					the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
-				if (div.size_b > 2)
-				{
-					// printlist(*stk_b);
-					the_best_way_to_r(stk_b, find_num(stk_b, check_num((*stk)->content, *stk_b, chunks, div)), div.size_b, 'b');
-				}
-				editstk_p(stk, stk_b, 'b');
-				div.size_a--;
-				div.size_b++;
-				// the_best_way_to_r(stk_b, find_small_num(stk_b), div.size_b, 'b');
-			}
+		while (++j < div.chuncks)
+		{
+			div.hold_first = scan_top(*stk, chunks, div.size_a, i);
+			div.hold_second = scan_bot(*stk, chunks, div.size_a, i);
+			if (div.hold_first <= div.hold_second)
+				the_best_way_to_r(stk, div.hold_first, div.size_a, 'a');
+			else
+				the_best_way_to_r(stk, div.size_a - div.hold_second, div.size_a, 'a');
+			if (div.size_b != 0)
+				the_best_way_to_r(stk_b, check_num((*stk)->content, *stk_b, div), div.size_b, 'b');
+			editstk_p(stk, stk_b, 'b');
+			div.size_a--;
+			div.size_b++;
+		}
 	}
 	if (div.rest > 0)
 	{
 		j = -1;
 		while (++j < div.rest)
 		{
-			hold_first = scan_top(*stk, chunks, div.size_a, i);
-			hold_second = scan_bot(*stk, chunks, div.size_a, i);
-			if (hold_first <= hold_second)
-				the_best_way_to_r(stk, hold_first, div.size_a, 'a');
+			div.hold_first = scan_top(*stk, chunks, div.size_a, i);
+			div.hold_second = scan_bot(*stk, chunks, div.size_a, i);
+			if (div.hold_first <= div.hold_second)
+				the_best_way_to_r(stk, div.hold_first, div.size_a, 'a');
 			else
-				the_best_way_to_r(stk, size - hold_second, div.size_a, 'a');
+				the_best_way_to_r(stk, div.size_a - div.hold_second, div.size_a, 'a');
 			if (div.size_b != 0)
-				the_best_way_to_r(stk_b, find_num(stk_b, check_num((*stk)->content, *stk_b, chunks, div)), div.size_b, 'b');
+				the_best_way_to_r(stk_b, check_num((*stk)->content, *stk_b, div), div.size_b, 'b');
 			editstk_p(stk, stk_b, 'b');
 			div.size_a--;
 			div.size_b++;
-			// the_best_way_to_r(stk_b, find_small_num(stk_b), div.size_b, 'b');
 		}
 	}
-	printlist(*stk_b);
+	// j = (div.div * div.chuncks) + div.rest;
+	// while (--j > -1)
+	// {
+	// 	div.hold_first = find_big_num(stk_b);
+	// 	div.hold_second = div.size_b - find_big_num_reverse(stk_b, div.size_b);
+	// 	if (div.hold_first <= div.hold_second)
+	// 		the_best_way_to_r(stk_b, div.hold_first, div.size_b, 'b');
+	// 	else
+	// 		the_best_way_to_r(stk_b, div.size_b - div.hold_second, div.size_b, 'b');
+	// 	editstk_p(stk_b, stk, 'a');
+	// 	div.size_a++;
+	// 	div.size_b--;
+	// }
+	// printlist(*stk);
 	j = (div.div * div.chuncks) + div.rest;
 	while (--j > -1)
 	{
